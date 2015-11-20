@@ -125,3 +125,76 @@ if exampleString.hasSuffix("lo") {
 if exampleString.hasPrefix("he") {
     print("started in he")
 }
+
+var array = ["apple", "banana", "dragonfruit"]
+array.insert("cherry", atIndex: 2)
+print(array)
+
+class Shape {
+    var numberOfSides = 0
+    func simpleDescription() -> String {
+        return "A shape with \(numberOfSides) sides."
+    }
+}
+
+let shape = Shape()
+shape.numberOfSides = 7
+print(shape.simpleDescription())
+
+class NamedShape {
+    var numberOfSides = 0
+    var name: String
+    init(name: String) {
+        self.name = name
+    }
+    func simpleDescription() -> String {
+        return "A shape with \(numberOfSides) sides called \(self.name)"
+    }
+}
+
+let triangle = NamedShape(name: "Triangle")
+print(triangle.simpleDescription())
+
+class Square: NamedShape {
+    var sideLength: Double
+    init(sideLength: Double, name: String) {
+        self.sideLength = sideLength
+        super.init(name: name)
+        numberOfSides = 4
+    }
+    
+    func area() -> Double {
+        return sideLength * sideLength
+    }
+    
+    override func simpleDescription() -> String {
+        return "A square with sides of length \(sideLength)"
+    }
+}
+
+let testSquare = Square(sideLength: 10, name: "Square")
+print(testSquare.area())
+print(testSquare.simpleDescription())
+
+class Circle: NamedShape {
+    var radius: Double
+    
+    init?(radius: Double, name: String) {
+        self.radius = radius
+        super.init(name: name)
+        numberOfSides = 1
+        if radius <= 0 {
+            return nil // A failable initializer can return nil after initialization. Use init? to declare failable initializer
+        }
+    }
+    
+    override func simpleDescription() -> String {
+        return "A \(name) with a radius of \(radius)"
+    }
+}
+
+let successfulCircle = Circle(radius: 4.2, name: "Successful circle")
+print(successfulCircle?.simpleDescription())
+
+let failedCircle = Circle(radius: -7.5, name: "failed circle")
+print(failedCircle?.simpleDescription())
