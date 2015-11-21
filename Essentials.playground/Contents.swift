@@ -1,3 +1,5 @@
+import UIKit
+
 // let to make a constant
 let myConstant = 13
 
@@ -198,3 +200,125 @@ print(successfulCircle?.simpleDescription())
 
 let failedCircle = Circle(radius: -7.5, name: "failed circle")
 print(failedCircle?.simpleDescription())
+
+class Triangle: NamedShape {
+    init(sideLength: Double, name: String) {
+        super.init(name: name)
+        numberOfSides = 3
+    }
+}
+
+let shapesArray = [Triangle(sideLength: 1.5, name: "triangle1"), Triangle(sideLength: 4.2, name: "triangle2"), Square(sideLength: 3.2, name: "square1"), Square(sideLength: 2.7, name: "square2")]
+
+var squares = 0
+var triangles = 0
+
+for shape in shapesArray {
+    if let square = shape as? Square {
+        squares++
+    } else if let triangle = shape as? Triangle {
+        triangles++
+    }
+}
+
+print("\(squares) squares and \(triangles) triangles.")
+
+enum Rank: Int {
+    case Ace = 1
+    case Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten
+    case Jack, Queen, King
+    func simpleDescription() -> String {
+        switch self {
+        case .Ace:
+            return "ace"
+        case .Jack:
+            return "jack"
+        case .Queen:
+            return "queen"
+        case .King:
+            return "king"
+        default:
+            return String(self.rawValue)
+        }
+    }
+}
+
+let ace = Rank.Ace
+let aceRawValue = ace.rawValue
+print(ace)
+print(aceRawValue)
+
+if let convertedRank = Rank(rawValue: 3) {
+    let threeDescription = convertedRank.simpleDescription()
+    print(threeDescription)
+}
+
+enum Suit {
+    case Spades, Hearts, Diamonds, Clubs
+    func simpleDescription() -> String {
+        switch self {
+        case .Spades:
+            return "spades"
+        case .Hearts:
+            return "penis"
+        case .Diamonds:
+            return "diamonds"
+        case .Clubs:
+            return "clubs"
+        }
+    }
+}
+
+let hearts = Suit.Hearts
+print(hearts)
+let heartsDescription = hearts.simpleDescription()
+print(heartsDescription)
+
+
+struct Card {
+    var rank: Rank
+    var suit: Suit
+    func simpleDescription() -> String {
+        return "The \(rank.simpleDescription()) of \(suit.simpleDescription())"
+    }
+}
+
+let threeOfSpaces = Card(rank: .Three, suit: .Spades)
+print (threeOfSpaces.simpleDescription())
+
+protocol ExampleProtocol {
+    var simpleDescription: String { get }
+    func adjust()
+}
+
+class SimpleClass: ExampleProtocol {
+    var simpleDescription: String = "A very simple class."
+    var anotherProperty: Int = 69105
+    func adjust() {
+        simpleDescription += " Now 100% adjusted."
+    }
+}
+
+var a = SimpleClass()
+a.adjust()
+print(a.simpleDescription)
+
+class SimpleClass2: ExampleProtocol {
+    var simpleDescription: String = "Another very simple class."
+    func adjust() {
+        simpleDescription += " Adjusted"
+    }
+}
+
+var protocolArray: [ExampleProtocol] = [SimpleClass(), SimpleClass(), SimpleClass2()]
+for instance in protocolArray {
+    instance.adjust()
+    print(instance.simpleDescription)
+}
+
+let sampleString: String = "hello"
+let sampleArray: Array = [1,2,3.14,23,42]
+
+
+let redSquare = UIView(frame: CGRect(x: 0, y: 0, width: 44, height: 44))
+redSquare.backgroundColor = UIColor.redColor()
